@@ -23,9 +23,9 @@ public class Studentgrade implements Serializable {
 
 	private String assignment;
 
-	private BigDecimal grade;
+	private int grade;
 
-	private BigDecimal studentid;
+	private int studentid;
 
 	@Column(name="\"TYPE\"")
 	private String type;
@@ -57,20 +57,20 @@ public class Studentgrade implements Serializable {
 		this.assignment = assignment;
 	}
 
-	public BigDecimal getGrade() {
+	public int getGrade() {
 		return this.grade;
 	}
 
-	public void setGrade(BigDecimal grade) {
-		this.grade = grade;
+	public void setGrade(int _grade) {
+		this.grade = _grade;
 	}
 
-	public BigDecimal getStudentid() {
+	public int getStudentid() {
 		return this.studentid;
 	}
 
-	public void setStudentid(BigDecimal studentid) {
-		this.studentid = studentid;
+	public void setStudentid(int _studentid) {
+		this.studentid = _studentid;
 	}
 
 	public String getType() {

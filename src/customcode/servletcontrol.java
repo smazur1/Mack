@@ -57,55 +57,71 @@ public class servletcontrol extends HttpServlet {
 			List<Studentgrade> students = null;
 
 			students = ProcessGrades.getStudentGradeByID(studentid);
-			
-			session.setAttribute("studentid", studentid);	
+
+			session.setAttribute("studentid", studentid);
 			session.setAttribute("assignments", students);
 			request.getRequestDispatcher("/output.jsp").forward(request, response);
-	
 
 		} else if (request.getParameter("option").equals("2")) {
-			
+
 			String type = request.getParameter("type");
 
-			//		Studentgrade st = null;
-					List<Studentgrade> students = null;
+			// Studentgrade st = null;
+			List<Studentgrade> students = null;
 
-					students = ProcessGrades.getStudentGradeByType(type);
-					//
-					
-					session.setAttribute("assignments", students);
-					request.getRequestDispatcher("/output.jsp").forward(request, response);
-					
+			students = ProcessGrades.getStudentGradeByType(type);
+			//
+
+			session.setAttribute("assignments", students);
+			request.getRequestDispatcher("/output.jsp").forward(request, response);
+
 		} else if (request.getParameter("option").equals("3")) {
-			
+
 			int studentid = Integer.parseInt(request.getParameter("studentid"));
 			String type = request.getParameter("type");
 			List<Studentgrade> students = null;
 
 			students = ProcessGrades.getStudentGradeByIDAndType(studentid, type);
-				
+
 			session.setAttribute("assignments", students);
 			request.getRequestDispatcher("/output.jsp").forward(request, response);
-			
+
 		} else if (request.getParameter("option").equals("7")) {
-			
+
 			int id = Integer.parseInt(request.getParameter("id"));
 			int grade = Integer.parseInt(request.getParameter("grade"));
 			int count = 0;
 			System.out.println("student id = " + request.getParameter("studentid"));
-		
+
+			int studentid = Integer.parseInt(request.getParameter("studentid"));
+			List<Studentgrade> students = null;
+
+			count = ProcessGrades.updateGrade(id, grade);
+			System.out.println("count = " + count);
+			students = ProcessGrades.getStudentGradeByID(studentid);
+
+			session.setAttribute("assignments", students);
+			request.getRequestDispatcher("/output.jsp").forward(request, response);
+
+		} else if (request.getParameter("option").equals("8")) {
+
+	//		int studentid = Integer.parseInt(request.getParameter("id"));
+			int grade = Integer.parseInt(request.getParameter("grade"));
+			int count = 0;
+			System.out.println("student id = " + request.getParameter("studentid"));
+			String assignment = request.getParameter("assignment");
+			String assigntype = request.getParameter("type");
+
+			int studentid = Integer.parseInt(request.getParameter("studentid"));
+			List<Studentgrade> students = null;
+
+			ProcessGrades.insertGrade(studentid, assignment, assigntype, grade);
+			System.out.println("count = " + count);
 			
-			int studentid = Integer.parseInt(request.getParameter("studentid"));			
-					List<Studentgrade> students = null;
-					
-					count = ProcessGrades.updateGrade(id, grade);
-System.out.println("count = " + count);
-					students = ProcessGrades.getStudentGradeByID(studentid);
-					
-					session.setAttribute("assignments", students);
-					request.getRequestDispatcher("/output.jsp").forward(request, response);
-					
-					
-		} 
+			students = ProcessGrades.getStudentGradeByID(studentid);
+
+			session.setAttribute("assignments", students);
+			request.getRequestDispatcher("/output.jsp").forward(request, response);
 	}
+}
 }
